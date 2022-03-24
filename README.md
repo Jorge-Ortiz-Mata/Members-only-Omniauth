@@ -1,24 +1,33 @@
-# README
+## Errors.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+These are some of the errors that I had while developing this web application.
 
-Things you may want to cover:
+### Error 1. Invalid route.
 
-* Ruby version
+This is the error that I got running the app:
+C:/Ruby30-x64/lib/ruby/gems/3.0.0/gems/actionpack-6.1.5/lib/action_dispatch/routing/route_set.rb:584:in `add_route': Invalid route name: 'user_facebook,_omniauth_authorize' (ArgumentError)
 
-* System dependencies
+Solution:
+Go to user.rb and change this:
 
-* Configuration
+* `:omniauth_providers => [:facebook, :google_oauth2]`
 
-* Database creation
+### Error 2. Invalid provider attribute.
 
-* Database initialization
+Once I deployed the app to heroku, there was an attribute unrecognized.
 
-* How to run the test suite
+Solution:
 
-* Services (job queues, cache servers, search engines, etc.)
+Delete all the users and type the next command:
 
-* Deployment instructions
+* `heroku restart`
 
-* ...
+### Error 3. Undefiend method [] nil.
+
+I saved my credentials using a Hash, so I had to change it.
+
+Solution:
+
+I had to change the hash param of my credentials like this:
+
+* `config.omniauth :facebook, Rails.application.credentials.facebook_app_id, Rails.application.credentials.facebook_secret_key`
